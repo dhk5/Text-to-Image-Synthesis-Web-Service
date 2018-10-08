@@ -1,0 +1,20 @@
+# Annotation dir  (Too big)
+Core/Annotation
+
+# Images dir (Too big)
+Core/Images
+
+# Image DB (Too big)
+Core/ImageNet.db
+
+# Image download urls (Too big)
+Core/fall11_urls.txt
+
+# node_modules
+Web-Service/node_modules
+
+# Python compile files
+Core/__pycache__
+
+# Intellij Settings
+Core/.idea
