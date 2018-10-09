@@ -285,3 +285,4 @@ def generateImage(processed_image_path_list, preposition):
     cv2.imwrite(created_image_path, background_image)
 
     print("--- %s seconds(Create Image) ---" % (time.time() - start_time))
+    return created_image_path
