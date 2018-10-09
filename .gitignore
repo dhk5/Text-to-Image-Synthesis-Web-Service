@@ -3,7 +3,7 @@
 # Annotation dir  (Too big)
 Core/Annotation
 
-# Images dir (Too big)
+# Downloaded images dir (Too big)
 Core/Images
 
 # Image DB (Too big)
@@ -12,7 +12,7 @@ Core/ImageNet.db
 # Image download urls (Too big)
 Core/fall11_urls.txt
 
-# Python compile files
+# Python compiled files
 Core/__pycache__
 Core/*.pyc
 
