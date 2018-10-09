@@ -1,3 +1,5 @@
+##### CORE #####
+
 # Annotation dir  (Too big)
 Core/Annotation
 
@@ -10,11 +12,19 @@ Core/ImageNet.db
 # Image download urls (Too big)
 Core/fall11_urls.txt
 
-# node_modules
-Web-Service/node_modules
-
 # Python compile files
 Core/__pycache__
 
 # Intellij Settings
 Core/.idea
+
+##### WEB SERVICE #####
+
+# node_modules
+Web-Service/node_modules
+
+# js output dir
+Web-Service/dist
+
+##### IOS APP #####
+
