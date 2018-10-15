@@ -55,7 +55,6 @@ def fetch_images_with_urls(word_net_id_list):
     db_conn = sqlite3.connect(os.path.join(str(image_db_dir),"ImageNet.db"))
     c = db_conn.cursor()
     http_conn = PoolManager()
-    print(word_net_id_list)
     for word_net_id in word_net_id_list:
 
         # Create a list of image ids that will be fetched
@@ -95,8 +94,8 @@ def fetch_images_with_urls(word_net_id_list):
                         shutil.copyfileobj(response, out_file)
                         url_count = url_count + 1
 
-        print("Image directory: " + image_folder_path)
-        print("--- %s seconds (Get Images) ---" % (time.time() - start_time))
+        # print("Image directory: " + image_folder_path)
+        # print("--- %s seconds (Get Images) ---" % (time.time() - start_time))
     c.close()
 
 

@@ -1,11 +1,8 @@
 
 import {Request, Response} from 'express';
-import * as path from 'path';
 
-interface PythonResult {
-    readonly responseCode : number;
-    readonly resultDetail : String;
-};
+import * as path from 'path';
+import * as fs from 'fs';
 
 export class ImageGenerator { 
     
@@ -18,14 +15,23 @@ export class ImageGenerator {
 
             const { spawn } = require('child_process');
             const pythonFilePath = path.join(__dirname + '/../../../Core/ImageGenerator.py');
-            console.log(pythonFilePath);
             const pythonProcess = spawn('python3', [pythonFilePath, sentence]);
         
             let result = { responseCode: 0, resultDetail: 'String' }
             pythonProcess.stdout.on('data', (data) => {
-                console.log('SUCCESS' + data.toString());
-                result = { responseCode: 200, resultDetail: data.toString }
-                res.status(result.responseCode).send(result.resultDetail);
+                let returnedData =  data.toString().trim();
+                console.log('SUCCESS: ' + returnedData);
+                fs.stat(returnedData, function(err, data) {
+                    if (err) {
+                        console.log(err);
+                        const errorString = 'Image could not be generated using the ' +
+                                            'given sentence: ' + queryText;
+                        res.status(500).send(errorString);
+                    } else {
+                        console.log('File exist!')
+                        res.sendFile(returnedData);
+                    }
+                });
             });
             
             pythonProcess.stderr.on('data', (data) => {
@@ -33,8 +39,7 @@ export class ImageGenerator {
                 const errorString = 'Unexpected error occured while ' +
                                     'generating the image for sentence: ' + 
                                     queryText;
-                result = { responseCode: 500, resultDetail: errorString }
-                res.status(result.responseCode).send(result.resultDetail);
+                res.status(500).send(errorString);
             });
         })               
     }

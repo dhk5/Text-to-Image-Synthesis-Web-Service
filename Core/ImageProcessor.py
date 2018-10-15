@@ -64,7 +64,7 @@ def process_images(image_path_list):
 
             # Write the image to the 'ProcessedImages' folder.
             cv2.imwrite(processed_image_path, img)
-            print("--- %s seconds(GrabCut) ---" % (time.time() - start_time))
+            # print("--- %s seconds(GrabCut) ---" % (time.time() - start_time))
 
         processed_image_path_list.append(processed_image_path)
     return processed_image_path_list
@@ -288,6 +288,6 @@ def generateImage(processed_image_path_list, preposition):
     overlay_image_alpha(background_image, dep_noun_image, (pos_x, pos_y))
 
     cv2.imwrite(created_image_path, background_image)
+    # print("--- %s seconds(Create Image) ---" % (time.time() - start_time))
 
-    print("--- %s seconds(Create Image) ---" % (time.time() - start_time))
     return created_image_path
