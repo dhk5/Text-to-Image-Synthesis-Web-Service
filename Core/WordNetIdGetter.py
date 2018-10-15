@@ -1,5 +1,6 @@
 #!/usr/local/bin/python3
 
+import os
 from nltk.corpus import wordnet
 
 
@@ -10,7 +11,9 @@ def get_word_net_ids(nouns):
     :param nouns:
     :return:
     '''
-    search_file_object = open('imagenet.bbox.obtain_synset_list.txt', 'r', encoding='utf8')
+    file_path = os.path.dirname(os.path.realpath(__file__))
+    image_bbox_file_path = os.path.join(str(file_path), 'imagenet.bbox.obtain_synset_list.txt')
+    search_file_object = open(image_bbox_file_path, 'r', encoding='utf8')
     search_file_text = search_file_object.read().rstrip().splitlines()
 
     # The dictionary object containing nouns

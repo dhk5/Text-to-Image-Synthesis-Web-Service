@@ -57,7 +57,8 @@ def getRandomImagePath(word_net_id):
     :param word_net_id: WordNet id of target image
     :return: image path
     '''
-    image_dir = os.path.join(os.getcwd(), 'Images')
+    file_path = os.path.dirname(os.path.realpath(__file__))
+    image_dir = os.path.join(file_path, 'Images')
     sub_dir = os.path.join(image_dir, word_net_id)
     files = os.listdir(sub_dir)
     index = random.randrange(1, len(files))

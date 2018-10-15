@@ -15,12 +15,14 @@ def process_images(image_path_list):
     :param image_path_list: list of the image paths
     :return: none
     '''
-    conn = sqlite3.connect("ImageNet.db")
-    c = conn.cursor()
+    image_db_dir = os.path.dirname(os.path.realpath(__file__))
+    db_conn = sqlite3.connect(os.path.join(str(image_db_dir), "ImageNet.db"))
+    c = db_conn.cursor()
 
     # The 'ProcessedImages' folder in the 'Images' directory consists of the images
     # after background subtraction.
-    processed_image_folder = os.path.join(os.getcwd(), "Images", "ProcessedImages")
+    file_path = os.path.dirname(os.path.realpath(__file__))
+    processed_image_folder = os.path.join(file_path, 'Images', 'ProcessedImages')
     if not os.path.exists(processed_image_folder):
         os.makedirs(processed_image_folder)
 
@@ -142,8 +144,9 @@ def calculateCoordinates(image, image_id):
     :param image_id:
     :return:
     '''
-    conn = sqlite3.connect("ImageNet.db")
-    c = conn.cursor()
+    image_db_dir = os.path.dirname(os.path.realpath(__file__))
+    db_conn = sqlite3.connect(os.path.join(str(image_db_dir), "ImageNet.db"))
+    c = db_conn.cursor()
 
     # Get image dimensions
     image_height, image_width = image.shape[0:2]
@@ -216,7 +219,9 @@ def generateImage(processed_image_path_list, preposition):
     three_quarter_left_fg = round(dep_image_height * 0.75)
     quarter_left_fg = round(dep_image_height * 0.25)
 
-    background_image = cv2.imread('./Icons/light-veneer.png')
+    file_path = os.path.dirname(os.path.realpath(__file__))
+    background_image_path = os.path.join(file_path, './Icons/light-veneer.png')
+    background_image = cv2.imread(background_image_path)
     background_image = cv2.resize(background_image, (main_image_width * 3, main_image_height * 3))
     background_image_height, background_image_width = background_image.shape[0:2]
     height_mid_canvas = round(background_image_height / 2)

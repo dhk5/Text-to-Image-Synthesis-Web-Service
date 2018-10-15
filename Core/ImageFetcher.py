@@ -51,7 +51,8 @@ def fetch_images_with_urls(word_net_id_list):
     :param word_net_id_list: list of wordnet ids
     :return: none
     '''
-    db_conn = sqlite3.connect("ImageNet.db")
+    image_db_dir = os.path.dirname(os.path.realpath(__file__))
+    db_conn = sqlite3.connect(os.path.join(str(image_db_dir),"ImageNet.db"))
     c = db_conn.cursor()
     http_conn = PoolManager()
     print(word_net_id_list)
@@ -59,14 +60,17 @@ def fetch_images_with_urls(word_net_id_list):
 
         # Create a list of image ids that will be fetched
         image_id_list = []
-        with open('ImageID.txt', 'r', encoding='utf8') as out_file:
+        image_file_dir = os.path.dirname(os.path.realpath(__file__))
+        image_id_file_path = os.path.join(str(image_file_dir), 'ImageID.txt')
+        with open(image_id_file_path, 'r', encoding='utf8') as out_file:
             for line in out_file:
                 if line.startswith(word_net_id):
                     image_id_list = line.split("\t")[1].strip().split(',')
                     break
 
         # Check how many images are downloaded for the target noun object
-        image_folder_path = os.path.join(os.getcwd(), 'Images', word_net_id)
+        file_path = os.path.dirname(os.path.realpath(__file__))
+        image_folder_path = os.path.join(file_path, 'Images', word_net_id)
         if not os.path.exists(image_folder_path):
             os.makedirs(image_folder_path)
         url_count = len(os.listdir(image_folder_path))
@@ -105,7 +109,8 @@ def fetchImages(word_net_id_dict):
     '''
     word_net_id_list = []
     for noun, word_net_id in word_net_id_dict.items():
-        image_folder_path = os.path.join(os.getcwd(), 'Images', word_net_id)
+        file_path = os.path.dirname(os.path.realpath(__file__))
+        image_folder_path = os.path.join(file_path, 'Images', word_net_id)
 
         if not os.path.exists(image_folder_path):
             word_net_id_list.append(word_net_id)
@@ -122,12 +127,15 @@ def fetchAllImages():
     :return: none
     '''
     word_net_id_list = []
-    with open('ImageID.txt', 'r', encoding='utf8') as out_file:
+    file_path = os.path.dirname(os.path.realpath(__file__))
+    image_id_file_path = os.path.join(str(file_path), 'ImageID.txt')
+    with open(image_id_file_path, 'r', encoding='utf8') as out_file:
         for line in out_file:
             word_net_id_list.append(line.split("\t")[0].strip())
     word_net_id_list_to_fetch = []
     for word_net_id in word_net_id_list:
-        image_folder_path = os.path.join(os.getcwd(), 'Images', word_net_id)
+        file_path = os.path.dirname(os.path.realpath(__file__))
+        image_folder_path = os.path.join(file_path, 'Images', word_net_id)
 
         if not os.path.exists(image_folder_path):
             word_net_id_list_to_fetch.append(word_net_id)
