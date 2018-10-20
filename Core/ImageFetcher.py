@@ -81,12 +81,13 @@ def fetch_images_with_urls(word_net_id_list):
             if url_count < 10 and image_id.startswith(word_net_id):
 
                 # First, find the url of the image from the database
-                url = c.execute('SELECT URL from ImageNetURLs WHERE ImageID=(?)', (image_id,)).fetchone()
+                url = c.execute('SELECT URL from ImageNetURLs WHERE ImageID=(?) ORDER BY RANDOM() LIMIT 10', (image_id,)).fetchone()
                 if url is not None:
                     if check_url(url[0]) is not False:
 
                         # Second, fetch the image
-                        response = http_conn.request('GET', url[0], preload_content=False)
+                        timeout = Timeout(connect=5.0, read=10.0)
+                        response = http_conn.request('GET', url[0], preload_content=False, timeout=timeout)
                         file_name = os.path.normpath(image_folder_path + "/" + image_id + ".png")
 
                         # Last, save the image on the local directory
@@ -138,6 +139,10 @@ def fetchAllImages():
 
         if not os.path.exists(image_folder_path):
             word_net_id_list_to_fetch.append(word_net_id)
+        else:
+            files = os.listdir(image_folder_path)
+            if len(files) < 10:
+                word_net_id_list_to_fetch.append(word_net_id)
 
     # Only fetch the noun object's images that does not exist already
     if word_net_id_list_to_fetch:
