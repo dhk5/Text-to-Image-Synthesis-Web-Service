@@ -1,5 +1,7 @@
 #!/usr/local/bin/python3
 
+import WordNetIdGetter
+
 from urllib3 import disable_warnings
 from urllib3 import PoolManager
 from urllib3.util.timeout import Timeout
@@ -75,7 +77,7 @@ def fetch_images_with_urls(word_net_id_list):
         url_count = len(os.listdir(image_folder_path))
 
         # Randomly download the images for the target noun object
-        random.shuffle(image_id_list)
+        random.Random(time.time()).shuffle(image_id_list)
         start_time = time.time()
         for image_id in image_id_list:
             if url_count < 10 and image_id.startswith(word_net_id):
@@ -120,7 +122,7 @@ def fetchImages(word_net_id_dict):
         fetch_images_with_urls(word_net_id_list)
 
 
-def fetchAllImages():
+def fetch_all_images():
     '''
     Fetch all images that are in the ImageId.txt file.
 
@@ -148,5 +150,28 @@ def fetchAllImages():
     if word_net_id_list_to_fetch:
         fetch_images_with_urls(word_net_id_list_to_fetch)
 
+def get_random_image_location(object_id):
+    '''
+
+    '''
+    failed = "FAILED"
+    file_path = os.path.dirname(os.path.realpath(__file__))
+    image_folder_path = os.path.join(file_path, 'Images', object_id)
+
+    image_file_list = []
+    if os.path.exists(image_folder_path):
+        image_file_list = os.listdir(image_folder_path)
+        if len(image_file_list) == 0:
+            print(failed)
+            return failed
+        else:
+            random.Random(time.time()).shuffle(image_file_list)
+
+    if len(image_file_list) > 0:
+        image_path = os.path.join(file_path, 'Images', object_id, image_file_list[0])
+        print(image_path)
+        return image_path
+
 if __name__ == '__main__':
-    fetchAllImages()
+    fetch_all_images()
+    # get_random_image_location('n13134947')

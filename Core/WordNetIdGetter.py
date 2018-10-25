@@ -1,7 +1,11 @@
 #!/usr/local/bin/python3
 
-import os
+# import nltk
+# nltk.download('wordnet')
+
 from nltk.corpus import wordnet
+
+import os
 
 
 def get_word_net_ids(nouns):

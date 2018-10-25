@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/local/bin/python3
 
 import sqlite3
 import os
@@ -44,10 +44,13 @@ def get_url_data():
 
     :return: none
     '''
-    search_file = open('ImageID.txt', 'r', encoding='utf8')
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    image_id_file_path = os.path.join(str(current_dir), 'ImageID.txt')
+    search_file = open(image_id_file_path, 'r', encoding='utf8')
     image_id_list = search_file.read().rstrip().splitlines()
     image_records = []
-    with open('fall11_urls.txt', 'r', encoding='utf8') as in_file:
+    fall_url_file_path = os.path.join(str(current_dir), 'fall11_urls.txt')
+    with open(fall_url_file_path, 'r', encoding='utf8') as in_file:
         for line in in_file:
             image_record = []
             line = line.rstrip().split("\t")
@@ -67,11 +70,14 @@ def get_dimension_data():
 
     :return: none
     '''
-    search_file = open('imagenet.bbox.obtain_synset_list.txt', 'r', encoding='utf8')
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    imagenet_bbox_file_path = os.path.join(str(current_dir), 'imagenet.bbox.obtain_synset_list.txt')
+    search_file = open(imagenet_bbox_file_path, 'r', encoding='utf8')
     imagenet_bbox_synset_list = search_file.read().rstrip().splitlines()
     image_dimensions_list = []
     for syn_set_id in imagenet_bbox_synset_list:
-        folder_path = os.path.normpath("./Annotation/" + syn_set_id + "/Annotation/" + syn_set_id)
+        image_db_dir = os.path.dirname(os.path.realpath(__file__))
+        folder_path = os.path.normpath(str(current_dir) + "/Annotation/" + syn_set_id + "/Annotation/" + syn_set_id)
         if os.path.isdir(folder_path):
             for image_file in os.listdir(folder_path):
                 image_dimension_record = []

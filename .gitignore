@@ -15,6 +15,7 @@ Core/fall11_urls.txt
 # Python compiled files
 Core/__pycache__
 Core/*.pyc
+Core/venv
 
 # Intellij Settings
 Core/.idea

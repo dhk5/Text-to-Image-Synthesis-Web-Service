@@ -1,5 +1,10 @@
 #!/usr/local/bin/python3
 
+# import nltk
+# nltk.download('punkt')
+# nltk.download('stopwords')
+# nltk.download('averaged_perceptron_tagger')
+
 from nltk import pos_tag
 from nltk import sent_tokenize
 from nltk.tokenize import word_tokenize
@@ -83,4 +88,6 @@ def tokenize(sentence):
     """
     words = pre_process_sentence(sentence)
     word_dict = tag_words(words)
+    # for key, val in word_dict.items():
+    #     print(key + ": " + val)
     return word_dict
