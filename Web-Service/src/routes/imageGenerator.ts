@@ -16,7 +16,6 @@ export class ImageGenerator {
             )
             const pythonProcess = spawn('python3', [pythonFilePath, sentence])
 
-            let result = { responseCode: 0, resultDetail: 'String' }
             pythonProcess.stdout.on('data', data => {
                 let returnedData = data.toString().trim()
                 console.log('SUCCESS: ' + returnedData)
@@ -41,6 +40,45 @@ export class ImageGenerator {
                     'Unexpected error occured while ' +
                     'generating the image for sentence: ' +
                     queryText
+                res.status(500).send(errorString)
+            })
+        })
+
+        app.route('/getImage').get((req: Request, res: Response) => {
+            const queryId = req.query.id
+            const sentence = queryId
+            console.log('QUERY String: ' + queryId)
+
+            const { spawn } = require('child_process')
+            const pythonFilePath = path.join(
+                __dirname + '/../../../Core/ImageFetcher.py'
+            )
+            const pythonProcess = spawn('python3', [pythonFilePath, sentence])
+
+            pythonProcess.stdout.on('data', data => {
+                let returnedData = data.toString().trim()
+                console.log('SUCCESS: ' + returnedData)
+                fs.stat(returnedData, function(err, data) {
+                    if (err) {
+                        console.log(err)
+                        const errorString =
+                            'Image could not be generated using the ' +
+                            'given sentence: ' +
+                            queryId
+                        res.status(500).send(errorString)
+                    } else {
+                        console.log('File exist!')
+                        res.sendFile(returnedData)
+                    }
+                })
+            })
+
+            pythonProcess.stderr.on('data', data => {
+                console.log('FAILED: ' + data.toString())
+                const errorString =
+                    'Unexpected error occured while ' +
+                    'generating the image for sentence: ' +
+                    queryId
                 res.status(500).send(errorString)
             })
         })

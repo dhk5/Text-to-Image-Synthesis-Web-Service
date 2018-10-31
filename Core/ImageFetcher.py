@@ -1,7 +1,5 @@
 #!/usr/local/bin/python3
 
-import WordNetIdGetter
-
 from urllib3 import disable_warnings
 from urllib3 import PoolManager
 from urllib3.util.timeout import Timeout
@@ -11,6 +9,7 @@ import os
 import random
 import shutil
 import sqlite3
+import sys
 import time
 
 disable_warnings(InsecureRequestWarning)
@@ -150,10 +149,12 @@ def fetch_all_images():
     if word_net_id_list_to_fetch:
         fetch_images_with_urls(word_net_id_list_to_fetch)
 
-def get_random_image_location(object_id):
+def get_random_image_location(args):
     '''
+    Return a random image path of object related to the id.
 
     '''
+    object_id = args[1]
     failed = "FAILED"
     file_path = os.path.dirname(os.path.realpath(__file__))
     image_folder_path = os.path.join(file_path, 'Images', object_id)
@@ -173,5 +174,5 @@ def get_random_image_location(object_id):
         return image_path
 
 if __name__ == '__main__':
-    fetch_all_images()
-    # get_random_image_location('n13134947')
+    # fetch_all_images()
+    get_random_image_location(sys.argv)
