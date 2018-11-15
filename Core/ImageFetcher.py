@@ -173,6 +173,19 @@ def get_random_image_location(args):
         print(image_path)
         return image_path
 
+def get_names_of_object_by_id(object_id):
+    '''
+    Return a list of object names by id
+
+    :param object_id:
+    :return: list of object names
+    '''
+    from nltk.corpus import wordnet as wn
+    object_synset = wn.synset_from_pos_and_offset('n',object_id)
+    object_names = object_synset.lemma_names()
+    return object_names
+
+
 if __name__ == '__main__':
     # fetch_all_images()
     get_random_image_location(sys.argv)
