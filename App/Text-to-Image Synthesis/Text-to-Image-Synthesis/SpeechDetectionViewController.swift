@@ -14,20 +14,20 @@ class SpeechDetectionViewController: UIViewController, SFSpeechRecognizerDelegat
     @IBOutlet weak var detectedTextLabel: UILabel!
     @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var startButton: UIButton!
-    
+
     let audioEngine = AVAudioEngine()
     let speechRecognizer: SFSpeechRecognizer? = SFSpeechRecognizer()
     let request = SFSpeechAudioBufferRecognitionRequest()
     var recognitionTask: SFSpeechRecognitionTask?
     var isRecording = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.requestSpeechAuthorization()
     }
-    
-//MARK: IBActions and Cancel
-    
+
+// MARK: IBActions and Cancel
+
     @IBAction func startButtonTapped(_ sender: UIButton) {
         if isRecording == true {
             audioEngine.inputNode?.removeTap(onBus: 0)
@@ -44,7 +44,7 @@ class SpeechDetectionViewController: UIViewController, SFSpeechRecognizerDelegat
             self.detectedTextLabel.text = ""
         }
     }
-    
+
     func cancelRecording() {
         audioEngine.stop()
         if let node = audioEngine.inputNode {
@@ -52,8 +52,8 @@ class SpeechDetectionViewController: UIViewController, SFSpeechRecognizerDelegat
         }
         recognitionTask?.cancel()
     }
-    
-//MARK: - Recognize Speech
+
+// MARK: - Recognize Speech
 
     func recordAndRecognizeSpeech() {
         guard let node = audioEngine.inputNode else { return }
@@ -79,10 +79,10 @@ class SpeechDetectionViewController: UIViewController, SFSpeechRecognizerDelegat
         }
         recognitionTask = speechRecognizer?.recognitionTask(with: request, resultHandler: { result, error in
             if let result = result {
-                
+
                 let bestString = result.bestTranscription.formattedString
                 self.detectedTextLabel.text = bestString
-                
+
                 var lastString: String = ""
                 for segment in result.bestTranscription.segments {
                     let indexTo = bestString.index(bestString.startIndex, offsetBy: segment.substringRange.location)
@@ -95,8 +95,8 @@ class SpeechDetectionViewController: UIViewController, SFSpeechRecognizerDelegat
             }
         })
     }
-    
-//MARK: - Check Authorization Status
+
+// MARK: - Check Authorization Status
 
 func requestSpeechAuthorization() {
     SFSpeechRecognizer.requestAuthorization { authStatus in
@@ -117,9 +117,9 @@ func requestSpeechAuthorization() {
         }
     }
 }
-    
-//MARK: - UI / Set view color.
-    
+
+// MARK: - UI / Set view color.
+
     func checkForColorsSaid(resultString: String) {
         switch resultString {
         case "red":
@@ -143,9 +143,9 @@ func requestSpeechAuthorization() {
         default: break
         }
     }
-    
-//MARK: - Alert
-    
+
+// MARK: - Alert
+
     func sendAlert(message: String) {
         let alert = UIAlertController(title: "Speech Recognizer Error", message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
