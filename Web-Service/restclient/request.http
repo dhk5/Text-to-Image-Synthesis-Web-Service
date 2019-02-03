@@ -1,18 +1,5 @@
-GET http://localhost:3000/generateImage HTTP/1.1
 
+GET http://localhost:3000/generateImage?text=cat%20on%20the%20table
 ###
 
-GET http://localhost:3000/generateImage?text=dog%20on%20the%20desk HTTP/1.1
-
-###
-
-GET http://localhost:3000/getImage?id=n13134947 HTTP/1.1
-
-###
-
-GET http://localhost:3000/generateImage HTTP/1.1
-content-type: application/json
-
-{
-    "text": "cat on the table",
-}
+GET http://localhost:3000/getImage?id=n04126066

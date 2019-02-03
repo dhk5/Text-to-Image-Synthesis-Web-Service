@@ -2,8 +2,7 @@
 //  AppDelegate.swift
 //  Speech-Recognition-Demo
 //
-//  Created by Jennifer A Sipila on 3/2/17.
-//  Copyright © 2017 Jennifer A Sipila. All rights reserved.
+//  Created by Ryan Kang on 3/2/17.
 //
 
 import UIKit
@@ -13,8 +12,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let normalAttributes = [NSAttributedString.Key.font: UIFont(name: "Helvetica-Bold", size: 20.0)!,
+                                NSAttributedString.Key.foregroundColor: UIColor.gray]
+        let selectedAttributes = [NSAttributedString.Key.font: UIFont(name: "Helvetica-Bold", size: 20.0)!,
+                                  NSAttributedString.Key.foregroundColor: UIColor.black]
+        UITabBarItem.appearance().setTitleTextAttributes(selectedAttributes, for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes(normalAttributes, for: .normal)
         return true
     }
 

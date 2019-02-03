@@ -30,7 +30,6 @@ def process_images(image_path_list):
     for image_path in image_path_list:
         image_name = os.path.basename(image_path)
         processed_image_path = os.path.join(processed_image_folder, image_name)
-
         # The GrabCut algorithm will run only if the image is not already
         # in the 'ProcessedImages' folder.
         if not os.path.exists(processed_image_path):
@@ -40,6 +39,7 @@ def process_images(image_path_list):
             # containing the object represented by the noun.
             start_time = time.time()
             image_dimensions = c.execute('SELECT * from ImageDimensions where ImageID=?', (image_id,)).fetchone()
+            # print(processed_image_path)
             img = cv2.imread(image_path)
 
             mask = np.zeros(img.shape[:2], np.uint8)
@@ -200,7 +200,7 @@ def generateImage(processed_image_path_list, preposition):
         return
 
     main_noun_image = cv2.imread(processed_image_path_list[0], cv2.IMREAD_UNCHANGED)
-    # main_noun_image = image_resize(main_noun_image, width=main_noun_image_width)
+    main_noun_image = image_resize(main_noun_image, width=main_noun_image_width)
     main_noun_image = cv2.resize(main_noun_image, (main_noun_image_width, main_noun_image_height))
     main_image_height, main_image_width = main_noun_image.shape[0:2]
     width_mid_bg = round(main_image_width / 2)

@@ -28,19 +28,10 @@ export class ImageGenerator {
                             queryText
                         res.status(500).send(errorString)
                     } else {
-                        console.log('File exist!')
+                        console.log('File already exist!')
                         res.sendFile(returnedData)
                     }
                 })
-            })
-
-            pythonProcess.stderr.on('data', data => {
-                console.log('FAILED: ' + data.toString())
-                const errorString =
-                    'Unexpected error occured while ' +
-                    'generating the image for sentence: ' +
-                    queryText
-                res.status(500).send(errorString)
             })
         })
 
@@ -62,8 +53,8 @@ export class ImageGenerator {
                     if (err) {
                         console.log(err)
                         const errorString =
-                            'Image could not be generated using the ' +
-                            'given sentence: ' +
+                            'Image could not be found using the ' +
+                            'given id: ' +
                             queryId
                         res.status(500).send(errorString)
                     } else {
@@ -71,15 +62,6 @@ export class ImageGenerator {
                         res.sendFile(returnedData)
                     }
                 })
-            })
-
-            pythonProcess.stderr.on('data', data => {
-                console.log('FAILED: ' + data.toString())
-                const errorString =
-                    'Unexpected error occured while ' +
-                    'generating the image for sentence: ' +
-                    queryId
-                res.status(500).send(errorString)
             })
         })
     }

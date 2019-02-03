@@ -97,5 +97,30 @@ def get_dimension_data():
     return image_dimensions_list
 
 
+def create_id_synset_data():
+    '''
+    Reads the ImageID.txt text file line by line, get the id of image
+    and create a text file of image names and id.
+
+    :return: name_id_map.txt file
+    '''
+    current_dir = os.path.dirname(os.path.realpath(__file__))
+    image_id_file_path = os.path.join(str(current_dir), 'ImageID.txt')
+    search_file = open(image_id_file_path, 'r', encoding='utf8')
+    image_id_list = search_file.read().rstrip().splitlines()
+    id_synset_list = []
+    for id in image_id_list:
+        id_synset_list.append(id.split('\t')[0])
+    from nltk.corpus import wordnet
+    name_id_map = {}
+    for id in id_synset_list:
+        synset = wordnet._synset_from_pos_and_offset('n', int(id.split('n')[1]))
+        for lemma in synset.lemmas():
+            name_id_map[lemma.name().split(".")[0]] = id
+    with open('name_id_map.txt', 'w') as file:
+        for name, id in name_id_map.items():
+            file.write(str(name) + ',' + str(id) + '\n')
+
+
 if __name__ == '__main__':
     setup_db()

@@ -12,6 +12,15 @@
 		4BC618021E68CA5000519D15 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BC618001E68CA5000519D15 /* Main.storyboard */; };
 		4BC618041E68CA5000519D15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BC618031E68CA5000519D15 /* Assets.xcassets */; };
 		4BC618071E68CA5000519D15 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BC618051E68CA5000519D15 /* LaunchScreen.storyboard */; };
+		B608B2C721F6A27D000F1D12 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = B608B2C621F6A27D000F1D12 /* placeholder.png */; };
+		B608B2C921F78FCE000F1D12 /* ImageCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B608B2C821F78FCE000F1D12 /* ImageCreateViewController.swift */; };
+		B6449BE921EBDDDA0044ADB1 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6449BE821EBDDDA0044ADB1 /* ImageFetcher.swift */; };
+		B6449BEB21EBECA80044ADB1 /* ErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6449BEA21EBECA80044ADB1 /* ErrorCode.swift */; };
+		B6449BED21EBF6E70044ADB1 /* SingleImageDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6449BEC21EBF6E70044ADB1 /* SingleImageDisplayViewController.swift */; };
+		B6449BF121ED9F2E0044ADB1 /* ImageCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6449BF021ED9F2E0044ADB1 /* ImageCollectionViewController.swift */; };
+		B659741921F04DD5005398CD /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B659741821F04DD5005398CD /* ImageCell.swift */; };
+		B659743C21F554F2005398CD /* name_id_map.txt in Resources */ = {isa = PBXBuildFile; fileRef = B659743B21F554F2005398CD /* name_id_map.txt */; };
+		B659743E21F59FD0005398CD /* ImageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B659743D21F59FD0005398CD /* ImageData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +31,15 @@
 		4BC618031E68CA5000519D15 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4BC618061E68CA5000519D15 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4BC618081E68CA5000519D15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B608B2C621F6A27D000F1D12 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		B608B2C821F78FCE000F1D12 /* ImageCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCreateViewController.swift; sourceTree = "<group>"; };
+		B6449BE821EBDDDA0044ADB1 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
+		B6449BEA21EBECA80044ADB1 /* ErrorCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorCode.swift; sourceTree = "<group>"; };
+		B6449BEC21EBF6E70044ADB1 /* SingleImageDisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleImageDisplayViewController.swift; sourceTree = "<group>"; };
+		B6449BF021ED9F2E0044ADB1 /* ImageCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewController.swift; sourceTree = "<group>"; };
+		B659741821F04DD5005398CD /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		B659743B21F554F2005398CD /* name_id_map.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = name_id_map.txt; sourceTree = "<group>"; };
+		B659743D21F59FD0005398CD /* ImageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +72,39 @@
 		4BC617FB1E68CA5000519D15 /* Text-to-Image-Synthesis */ = {
 			isa = PBXGroup;
 			children = (
+				B608B2CB21F78FFF000F1D12 /* Image-to-Text */,
+				B608B2CA21F78FE0000F1D12 /* Text-to-Image */,
 				4BC617FC1E68CA5000519D15 /* AppDelegate.swift */,
-				4B37883B1E69D72200EB2DB0 /* SpeechDetectionViewController.swift */,
-				4BC618001E68CA5000519D15 /* Main.storyboard */,
+				B6449BE821EBDDDA0044ADB1 /* ImageFetcher.swift */,
+				B6449BEA21EBECA80044ADB1 /* ErrorCode.swift */,
 				4BC618031E68CA5000519D15 /* Assets.xcassets */,
+				4BC618001E68CA5000519D15 /* Main.storyboard */,
 				4BC618051E68CA5000519D15 /* LaunchScreen.storyboard */,
 				4BC618081E68CA5000519D15 /* Info.plist */,
 			);
 			path = "Text-to-Image-Synthesis";
+			sourceTree = "<group>";
+		};
+		B608B2CA21F78FE0000F1D12 /* Text-to-Image */ = {
+			isa = PBXGroup;
+			children = (
+				4B37883B1E69D72200EB2DB0 /* SpeechDetectionViewController.swift */,
+				B6449BEC21EBF6E70044ADB1 /* SingleImageDisplayViewController.swift */,
+			);
+			path = "Text-to-Image";
+			sourceTree = "<group>";
+		};
+		B608B2CB21F78FFF000F1D12 /* Image-to-Text */ = {
+			isa = PBXGroup;
+			children = (
+				B6449BF021ED9F2E0044ADB1 /* ImageCollectionViewController.swift */,
+				B608B2C821F78FCE000F1D12 /* ImageCreateViewController.swift */,
+				B659741821F04DD5005398CD /* ImageCell.swift */,
+				B659743D21F59FD0005398CD /* ImageData.swift */,
+				B659743B21F554F2005398CD /* name_id_map.txt */,
+				B608B2C621F6A27D000F1D12 /* placeholder.png */,
+			);
+			path = "Image-to-Text";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,7 +168,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BC618071E68CA5000519D15 /* LaunchScreen.storyboard in Resources */,
+				B659743C21F554F2005398CD /* name_id_map.txt in Resources */,
 				4BC618041E68CA5000519D15 /* Assets.xcassets in Resources */,
+				B608B2C721F6A27D000F1D12 /* placeholder.png in Resources */,
 				4BC618021E68CA5000519D15 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,8 +182,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6449BF121ED9F2E0044ADB1 /* ImageCollectionViewController.swift in Sources */,
+				B6449BED21EBF6E70044ADB1 /* SingleImageDisplayViewController.swift in Sources */,
+				B6449BEB21EBECA80044ADB1 /* ErrorCode.swift in Sources */,
+				B608B2C921F78FCE000F1D12 /* ImageCreateViewController.swift in Sources */,
+				B6449BE921EBDDDA0044ADB1 /* ImageFetcher.swift in Sources */,
 				4B37883C1E69D72200EB2DB0 /* SpeechDetectionViewController.swift in Sources */,
+				B659741921F04DD5005398CD /* ImageCell.swift in Sources */,
 				4BC617FD1E68CA5000519D15 /* AppDelegate.swift in Sources */,
+				B659743E21F59FD0005398CD /* ImageData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,7 +317,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.RyanKang.capstone.Text-to-Image-Synthesis";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -279,7 +331,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.RyanKang.capstone.Text-to-Image-Synthesis";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

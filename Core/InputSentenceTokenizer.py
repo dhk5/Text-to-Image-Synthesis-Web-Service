@@ -15,7 +15,7 @@ import string
 
 prepositions_list = {'before', 'after', 'above', 'below', 'to',
                      'on', 'off', 'over', 'under', 'further',
-                     'from', 'up', 'down', 'in', 'out'}
+                     'from', 'up', 'down', 'in', 'out', 'between'}
 
 def pre_process_sentence(input_sentence):
     """
@@ -67,9 +67,9 @@ def tag_words(words):
     # Differentiate between nouns and preposition
     words = pos_tag(words)
     for word, tag in words:
-        if tag == 'NN':
+        if tag.startswith('N'):
             noun_list.append(word)
-        if tag == 'IN':
+        if tag.startswith('IN'):
             tag_list.append(word)
 
     word_dict['Dependent_Noun'] = noun_list[0]
