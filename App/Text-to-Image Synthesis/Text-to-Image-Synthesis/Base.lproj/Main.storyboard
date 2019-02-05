@@ -32,23 +32,14 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1z8-1k-eic">
                                 <rect key="frame" x="19" y="183.5" width="337.5" height="266.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Tap button to start voice recognition!" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5dY-bZ-5TA">
-                                <rect key="frame" x="0.0" y="537.5" width="375" height="27.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="5dY-bZ-5TA" secondAttribute="trailing" id="CGy-B6-MHD"/>
-                            <constraint firstItem="5dY-bZ-5TA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="IG8-06-ehx"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="uio-ot-qhS" secondAttribute="bottom" id="SbJ-9V-cpb"/>
-                            <constraint firstItem="uio-ot-qhS" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5dY-bZ-5TA" secondAttribute="bottom" id="TNw-Dy-IcI"/>
                             <constraint firstItem="1z8-1k-eic" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.9" id="ads-vV-OYV"/>
                             <constraint firstItem="1z8-1k-eic" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cyD-Ih-anf"/>
                             <constraint firstItem="1z8-1k-eic" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.4" id="h3r-ND-LH5"/>
