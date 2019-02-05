@@ -274,8 +274,8 @@ def generateImage(processed_image_path_list, preposition):
         pos_x = bb_x2_main - three_quarter_left_fg
         pos_y = bb_y1_main + (height_mid_bg - height_mid_fg)
     elif preposition == 'on':
-        pos_x = bb_x1_main
-        pos_y = bb_y2_main
+        pos_x = bb_x1_main + (width_mid_bg - width_mid_fg)
+        pos_y = bb_y1_main - three_quarter_left_fg
     elif preposition == 'under':
         pos_x = bb_x1_main + (width_mid_bg - width_mid_fg)
         pos_y = bb_y2_main

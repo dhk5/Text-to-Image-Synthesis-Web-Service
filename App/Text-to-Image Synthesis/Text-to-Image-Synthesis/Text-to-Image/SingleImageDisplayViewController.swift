@@ -28,10 +28,17 @@ class SingleImageDisplayViewController: UIViewController {
                 self.sendAlert(message: "There has been an error while fetching the image.")
             }
             
-            if let data = data {
-                print("Download Finished For: " + data.description)
-                DispatchQueue.main.async() {
-                    self.updateViewWithImage(data)
+            if let response = response, let data = data {
+                let httpResponse = response as! HTTPURLResponse
+                if (httpResponse.statusCode == 500) {
+                    let dataString = String(data: data, encoding: String.Encoding.ascii)!
+                    print(dataString)
+                    self.sendAlert(message: dataString)
+                } else {
+                    print("Download Finished For: " + data.description)
+                    DispatchQueue.main.async() {
+                        self.updateViewWithImage(data)
+                    }
                 }
             }
         }

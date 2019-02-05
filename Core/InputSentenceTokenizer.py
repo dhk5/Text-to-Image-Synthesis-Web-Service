@@ -86,7 +86,12 @@ def tokenize(sentence):
     :param sentence: string
     :return: dictionary
     """
+
+    failed = "FAILED"
     words = pre_process_sentence(sentence)
+    if len(words) != 3:
+        print(failed)
+        return failed
     word_dict = tag_words(words)
     # for key, val in word_dict.items():
     #     print(key + ": " + val)

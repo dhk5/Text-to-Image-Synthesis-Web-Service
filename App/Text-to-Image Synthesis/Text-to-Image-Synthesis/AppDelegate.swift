@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let normalAttributes = [NSAttributedString.Key.font: UIFont(name: "Helvetica-Bold", size: 20.0)!,
                                 NSAttributedString.Key.foregroundColor: UIColor.gray]
         let selectedAttributes = [NSAttributedString.Key.font: UIFont(name: "Helvetica-Bold", size: 20.0)!,
-                                  NSAttributedString.Key.foregroundColor: UIColor.black]
+                                  NSAttributedString.Key.foregroundColor: UIColor(red: 0.0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)]
         UITabBarItem.appearance().setTitleTextAttributes(selectedAttributes, for: .selected)
         UITabBarItem.appearance().setTitleTextAttributes(normalAttributes, for: .normal)
         return true

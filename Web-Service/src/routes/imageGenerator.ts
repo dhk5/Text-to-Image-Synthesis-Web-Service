@@ -18,20 +18,28 @@ export class ImageGenerator {
 
             pythonProcess.stdout.on('data', data => {
                 let returnedData = data.toString().trim()
-                console.log('SUCCESS: ' + returnedData)
-                fs.stat(returnedData, function(err, data) {
-                    if (err) {
-                        console.log(err)
-                        const errorString =
-                            'Image could not be generated using the ' +
-                            'given sentence: ' +
-                            queryText
-                        res.status(500).send(errorString)
-                    } else {
-                        console.log('File already exist!')
-                        res.sendFile(returnedData)
-                    }
-                })
+                if (returnedData == 'FAILED') {
+                    const errorString =
+                        'Image could not be generated using the ' +
+                        'given sentence: ' +
+                        queryText
+                    console.log('FAILED')
+                    res.status(500).send(errorString)
+                } else {
+                    fs.stat(returnedData, function(err, data) {
+                        if (err) {
+                            console.log(err)
+                            const errorString =
+                                'Image could not be found using the ' +
+                                'given sentence: ' +
+                                queryText
+                            res.status(500).send(errorString)
+                        } else {
+                            console.log('File exist!')
+                            res.sendFile(returnedData)
+                        }
+                    })
+                }
             })
         })
 

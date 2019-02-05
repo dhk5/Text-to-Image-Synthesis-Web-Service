@@ -15,12 +15,6 @@ public enum ErrorCode: Int {
     unexpectedServerResponse = -2,
     invalidServerResponse = -3,
     invalidUrl = -4,
-    redirectError = -5,
-    userCanceled = -6,
-    reverseProxyResponseError = -7,
-    signInFailed = -8,
-    proxyAuthFailed = -9,
-    invalidAppState = -10,
-    unauthorized = -11,
-    generalError = -9999
+    invalidAppState = -5,
+    generalError = -6
 }

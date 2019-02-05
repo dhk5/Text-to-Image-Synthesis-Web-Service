@@ -69,6 +69,7 @@ class ImageCreateViewController: UIViewController {
         } else {
             imagePreposition = "Near"
         }
+        generateButton.isEnabled = true
     }
 }
 
@@ -83,11 +84,14 @@ extension ImageCreateViewController {
 
     private func setUp() {
         title = titleText
+        generateButton.isEnabled = false
         mainNoundImageView.translatesAutoresizingMaskIntoConstraints = true
         mainNoundImageView.image = arrSelectedData[0].image
-        mainNoundImageTitle = arrSelectedData[0].imageName
+        let mainNounImageName = arrSelectedData[0].imageName
+        mainNoundImageTitle = String(mainNounImageName.first!).capitalized + mainNounImageName.dropFirst()
         dependenNounImageView.translatesAutoresizingMaskIntoConstraints = true
         dependenNounImageView.image = arrSelectedData[1].image
-        dependentNounImageTitle = arrSelectedData[1].imageName
+        let dependentNounImageName = arrSelectedData[1].imageName
+        dependentNounImageTitle = String(dependentNounImageName.first!).capitalized + dependentNounImageName.dropFirst()
     }
 }

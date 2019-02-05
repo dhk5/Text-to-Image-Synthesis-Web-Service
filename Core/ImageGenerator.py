@@ -19,8 +19,10 @@ def main(args):
     :return:
     '''
     # Tokenize the input sentence to Main_Noun, Dependent_Noun, and Preposition
-    word_dict = InputSentenceTokenizer.tokenize(args[1])
     failed = "FAILED"
+    word_dict = InputSentenceTokenizer.tokenize(args[1])
+    if word_dict == failed:
+        return failed
 
     # Create a dictionary with wordnet id for noun objects
     nouns = {word_dict.get('Dependent_Noun'), word_dict.get('Main_Noun')}
