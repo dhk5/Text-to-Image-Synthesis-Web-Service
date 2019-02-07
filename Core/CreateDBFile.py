@@ -114,9 +114,8 @@ def create_id_synset_data():
     from nltk.corpus import wordnet
     name_id_map = {}
     for id in id_synset_list:
-        synset = wordnet._synset_from_pos_and_offset('n', int(id.split('n')[1]))
-        for lemma in synset.lemmas():
-            name_id_map[lemma.name().split(".")[0]] = id
+        synset = wordnet.synset_from_pos_and_offset('n', int(id.split('n')[1]))
+        name_id_map[synset.lemmas()[0].name().split(".")[0]] = id
     with open('name_id_map.txt', 'w') as file:
         for name, id in name_id_map.items():
             file.write(str(name) + ',' + str(id) + '\n')
@@ -124,3 +123,4 @@ def create_id_synset_data():
 
 if __name__ == '__main__':
     setup_db()
+    create_id_synset_data()

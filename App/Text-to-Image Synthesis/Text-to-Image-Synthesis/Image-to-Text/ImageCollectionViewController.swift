@@ -205,6 +205,7 @@ extension ImageCollectionViewController {
                 DispatchQueue.main.async() {
                     let image = UIImage(named: self.placeHolderImageName)
                     imageData.image = image
+                    cell.imageLabel.text = ""
                     self.updateCellWithImage(image!, cell)
                 }
             }
@@ -214,10 +215,12 @@ extension ImageCollectionViewController {
                 DispatchQueue.main.async() {
                     if let image = UIImage(data: data) {
                         imageData.image = image
+                        cell.imageLabel.text = imageData.imageName
                         self.updateCellWithImage(image, cell)
                     } else {
                         let image = UIImage(named: self.placeHolderImageName)
                         imageData.image = image
+                        cell.imageLabel.text = ""
                         self.updateCellWithImage(image!, cell)
                     }
                 }

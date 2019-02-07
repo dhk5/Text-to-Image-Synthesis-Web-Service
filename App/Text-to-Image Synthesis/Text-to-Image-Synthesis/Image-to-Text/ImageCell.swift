@@ -9,6 +9,7 @@ import UIKit
 
 class ImageCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageLabel: UILabel!
     var isImageLoaded: Bool = false
     
     override func awakeFromNib() {

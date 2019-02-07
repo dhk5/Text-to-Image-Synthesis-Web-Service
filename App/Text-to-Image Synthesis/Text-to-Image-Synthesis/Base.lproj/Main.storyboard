@@ -125,18 +125,28 @@
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vNN-eT-rs3">
-                                            <rect key="frame" x="8" y="28" width="184" height="164"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vNN-eT-rs3">
+                                            <rect key="frame" x="8" y="28" width="184" height="136.5"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NoU-tt-Fn5">
+                                            <rect key="frame" x="8" y="171.5" width="184" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="bottomMargin" secondItem="vNN-eT-rs3" secondAttribute="bottom" id="2Jh-Hk-W1Q"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="NoU-tt-Fn5" secondAttribute="bottom" id="JpN-ci-wag"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="vNN-eT-rs3" secondAttribute="trailing" id="SqN-cE-Kx4"/>
                                     <constraint firstItem="vNN-eT-rs3" firstAttribute="top" secondItem="TLo-St-eE7" secondAttribute="topMargin" id="TtP-na-jHS"/>
+                                    <constraint firstItem="NoU-tt-Fn5" firstAttribute="leading" secondItem="TLo-St-eE7" secondAttribute="leadingMargin" id="YQ4-ZG-3cd"/>
                                     <constraint firstItem="vNN-eT-rs3" firstAttribute="leading" secondItem="TLo-St-eE7" secondAttribute="leadingMargin" id="gEY-EH-tiu"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="NoU-tt-Fn5" secondAttribute="trailing" id="p2D-NX-ZW0"/>
+                                    <constraint firstItem="NoU-tt-Fn5" firstAttribute="top" secondItem="vNN-eT-rs3" secondAttribute="bottomMargin" constant="15" id="toK-VF-2MS"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="imageLabel" destination="NoU-tt-Fn5" id="pDD-Kr-GAP"/>
                                     <outlet property="imageView" destination="vNN-eT-rs3" id="Ihx-BO-xsm"/>
                                 </connections>
                             </collectionViewCell>
@@ -189,8 +199,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kvF-4x-R2i">
                                 <rect key="frame" x="112" y="108" width="150" height="150"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yz0-td-wgQ">
-                                <rect key="frame" x="0.0" y="491" width="375" height="35"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yz0-td-wgQ">
+                                <rect key="frame" x="0.0" y="516" width="375" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -214,16 +224,18 @@
                             <constraint firstItem="kvF-4x-R2i" firstAttribute="centerX" secondItem="t4Y-Mk-XzY" secondAttribute="centerXWithinMargins" id="Ggy-Pe-4cH"/>
                             <constraint firstItem="Wj3-wg-2bT" firstAttribute="leading" secondItem="t4Y-Mk-XzY" secondAttribute="leading" id="L0O-v6-b8P"/>
                             <constraint firstAttribute="trailing" secondItem="Wj3-wg-2bT" secondAttribute="trailing" id="Yah-hh-DnJ"/>
+                            <constraint firstAttribute="trailing" secondItem="yz0-td-wgQ" secondAttribute="trailing" id="Zlv-md-Wm6"/>
+                            <constraint firstItem="yz0-td-wgQ" firstAttribute="leading" secondItem="t4Y-Mk-XzY" secondAttribute="leading" id="dme-3T-yQq"/>
                             <constraint firstItem="kvF-4x-R2i" firstAttribute="centerY" secondItem="t4Y-Mk-XzY" secondAttribute="centerY" id="fey-Xj-DaT"/>
                             <constraint firstItem="WMM-32-Z7R" firstAttribute="top" secondItem="kvF-4x-R2i" secondAttribute="bottom" constant="20" id="n32-dg-Znt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bsc-g1-vzH"/>
                     <connections>
-                        <outlet property="dependenNounImageView" destination="WMM-32-Z7R" id="2Q3-VD-cuh"/>
+                        <outlet property="dependentNounImageView" destination="WMM-32-Z7R" id="2Q3-VD-cuh"/>
                         <outlet property="generateButton" destination="Wj3-wg-2bT" id="z0h-kr-6sy"/>
                         <outlet property="imageDescriptionLabel" destination="yz0-td-wgQ" id="hIo-Yz-wwi"/>
-                        <outlet property="mainNoundImageView" destination="kvF-4x-R2i" id="aVn-fW-fwE"/>
+                        <outlet property="mainNounImageView" destination="kvF-4x-R2i" id="aVn-fW-fwE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMq-BM-Wd3" userLabel="First Responder" sceneMemberID="firstResponder"/>
