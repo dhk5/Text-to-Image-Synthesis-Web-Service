@@ -8,8 +8,8 @@
 import Foundation
 
 class ImageFetcher {
-    private let getTextToImageUrlPath = "http://localhost:3000/generateImage?text="
-    private let getRandomImageUrlPath = "http://localhost:3000/getImage?id="
+    private let getTextToImageUrlPath = "http://ec2-18-216-138-253.us-east-2.compute.amazonaws.com/generateImage?text="
+    private let getRandomImageUrlPath = "http://ec2-18-216-138-253.us-east-2.compute.amazonaws.com/getImage?id="
     
     func fetchImageWithText(commandText: String, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         let urlString = commandText.replacingOccurrences(of: " ", with: "%20")
