@@ -312,6 +312,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = XT8KJQ6H3A;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "Text-to-Image-Synthesis/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -326,6 +327,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = XT8KJQ6H3A;
+				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = "Text-to-Image-Synthesis/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

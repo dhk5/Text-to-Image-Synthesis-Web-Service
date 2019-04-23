@@ -218,10 +218,7 @@ extension ImageCollectionViewController {
                         cell.imageLabel.text = imageData.imageName
                         self.updateCellWithImage(image, cell)
                     } else {
-                        let image = UIImage(named: self.placeHolderImageName)
-                        imageData.image = image
-                        cell.imageLabel.text = ""
-                        self.updateCellWithImage(image!, cell)
+                        self.loadImageOnCell(imageData, indexPath, cell)
                     }
                 }
             }
