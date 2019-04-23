@@ -63,6 +63,7 @@ def tag_words(words):
     word_dict = {}
     noun_list = []
     tag_list = []
+    failed = "FAILED"
 
     # Differentiate between nouns and preposition
     words = pos_tag(words)
@@ -71,6 +72,10 @@ def tag_words(words):
             noun_list.append(word)
         if tag.startswith('IN'):
             tag_list.append(word)
+
+    if len(noun_list) != 2 or len(tag_list) != 1:
+        print(failed)
+        return failed
 
     word_dict['Dependent_Noun'] = noun_list[0]
     word_dict['Main_Noun'] = noun_list[1]

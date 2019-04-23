@@ -14,6 +14,7 @@ class SingleImageDisplayViewController: UIViewController {
     var voiceCommandText: String = ""
     let info = ProcessInfo.processInfo
     var startTime = 0.0
+    let preposition_words = ["on", "under", "above", "below", "near", "between"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
