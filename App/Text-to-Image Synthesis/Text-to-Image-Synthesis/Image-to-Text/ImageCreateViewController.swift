@@ -70,6 +70,9 @@ class ImageCreateViewController: UIViewController {
         } else if -50 < locationDifferenceX && locationDifferenceX < 50 &&
             locationDifferenceY < -140 {
             imagePreposition = "Below"
+        } else if -50 < locationDifferenceX && locationDifferenceX < 50 &&
+            -50 < locationDifferenceY && locationDifferenceY < 50 {
+            imagePreposition = "Over"
         } else {
             imagePreposition = "Near"
         }

@@ -12,11 +12,14 @@ class SingleImageDisplayViewController: UIViewController {
     var vSpinner : UIView?
     
     var voiceCommandText: String = ""
+    let info = ProcessInfo.processInfo
+    var startTime = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = voiceCommandText
         self.showSpinner(onView: self.view)
+        startTime = info.systemUptime
         loadImage(voiceCommandText)
     }
     
@@ -44,6 +47,8 @@ class SingleImageDisplayViewController: UIViewController {
                     }
                 }
             }
+            let diff = (self.info.systemUptime - self.startTime)
+            print("Elapsed Time: \(diff)")
         }
     }
     
