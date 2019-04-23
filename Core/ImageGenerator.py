@@ -37,7 +37,7 @@ def main(args):
 
     # Randomly pick images to generate an image that describes the input sentence
     image_path_list_to_process = []
-    for key, value in word_net_id_dict.items():
+    for key, value in sorted(word_net_id_dict.items()):
         image_path = getRandomImagePath(value)
         image_path_list_to_process.append(image_path)
 
