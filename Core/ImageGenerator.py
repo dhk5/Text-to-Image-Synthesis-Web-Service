@@ -25,7 +25,7 @@ def main(args):
         return failed
 
     # Create a dictionary with wordnet id for noun objects
-    nouns = {word_dict.get('Dependent_Noun'), word_dict.get('Main_Noun')}
+    nouns = [word_dict.get('Dependent_Noun'), word_dict.get('Main_Noun')]
     word_net_id_dict = WordNetIdGetter.get_word_net_ids(nouns)
     for key, value in word_net_id_dict.items():
         if not value:
@@ -37,9 +37,10 @@ def main(args):
 
     # Randomly pick images to generate an image that describes the input sentence
     image_path_list_to_process = []
-    for key, value in sorted(word_net_id_dict.items()):
-        image_path = getRandomImagePath(value)
-        image_path_list_to_process.append(image_path)
+    image_path = getRandomImagePath(word_net_id_dict.get(word_dict.get('Dependent_Noun')))
+    image_path_list_to_process.append(image_path)
+    image_path = getRandomImagePath(word_net_id_dict.get(word_dict.get('Main_Noun')))
+    image_path_list_to_process.append(image_path)
 
     # Generate the image
     processed_image_path_list = ImageProcessor.process_images(image_path_list_to_process)
