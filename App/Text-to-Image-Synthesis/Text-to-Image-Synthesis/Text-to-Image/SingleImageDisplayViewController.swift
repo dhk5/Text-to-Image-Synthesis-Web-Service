@@ -26,30 +26,40 @@ class SingleImageDisplayViewController: UIViewController {
     
     //MARK: - ImageView Helper functions
     private func loadImage(_ voiceCommandText: String) {
-        let fetcher = ImageFetcher()
-        print("Downloading Started For: " + voiceCommandText)
-        fetcher.fetchImageWithText(commandText: voiceCommandText) { data, response, error in
-            self.removeSpinner()
-            if let error = error {
-                print("Image fetch failed with error: \(error)")
-                self.sendAlert(message: "There has been an error while fetching the image.")
+        var known_preposition = false
+        for word in preposition_words {
+            if voiceCommandText.lowercased().contains(word) {
+                known_preposition = true
             }
-            
-            if let response = response, let data = data {
-                let httpResponse = response as! HTTPURLResponse
-                if (httpResponse.statusCode == 500) {
-                    let dataString = String(data: data, encoding: String.Encoding.ascii)!
-                    print(dataString)
-                    self.sendAlert(message: dataString)
-                } else {
-                    print("Download Finished For: " + data.description)
-                    DispatchQueue.main.async() {
-                        self.updateViewWithImage(data)
+        }
+        if !known_preposition {
+            self.sendAlert(message: "Uknown preposition. Please try again!")
+        } else {
+            let fetcher = ImageFetcher()
+            print("Downloading Started For: " + voiceCommandText)
+            fetcher.fetchImageWithText(commandText: voiceCommandText) { data, response, error in
+                self.removeSpinner()
+                if let error = error {
+                    print("Image fetch failed with error: \(error)")
+                    self.sendAlert(message: "There has been an error while fetching the image.")
+                }
+                
+                if let response = response, let data = data {
+                    let httpResponse = response as! HTTPURLResponse
+                    if (httpResponse.statusCode == 500) {
+                        let dataString = String(data: data, encoding: String.Encoding.ascii)!
+                        print(dataString)
+                        self.sendAlert(message: dataString)
+                    } else {
+                        print("Download Finished For: " + data.description)
+                        DispatchQueue.main.async() {
+                            self.updateViewWithImage(data)
+                        }
                     }
                 }
+                let diff = (self.info.systemUptime - self.startTime)
+                print("Elapsed Time: \(diff)")
             }
-            let diff = (self.info.systemUptime - self.startTime)
-            print("Elapsed Time: \(diff)")
         }
     }
     
