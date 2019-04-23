@@ -7,7 +7,7 @@
         "build": "tsc",
         "dev": "ts-node ./src/server.ts",
         "start": "nodemon ./dist/server.js",
-        "prod": "npm run build && npm run start",
+        "prod": "npm run prettier && npm run build && npm run start",
         "prettier": "prettier --write src/**/*.ts"
     },
     "author": "Ryan Kang",
