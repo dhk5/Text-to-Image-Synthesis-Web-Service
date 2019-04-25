@@ -37,13 +37,13 @@ def main(args):
 
     # Randomly pick images to generate an image that describes the input sentence
     image_path_list_to_process = []
-    image_path = getRandomImagePath(word_net_id_dict.get(word_dict.get('Main_Noun')))
-    image_path_list_to_process.append(image_path)
-    image_path = getRandomImagePath(word_net_id_dict.get(word_dict.get('Dependent_Noun')))
-    image_path_list_to_process.append(image_path)
+    main_noun_image_path = getRandomImagePath(word_net_id_dict.get(word_dict.get('Main_Noun')))
+    dependent_noun_image_path = getRandomImagePath(word_net_id_dict.get(word_dict.get('Dependent_Noun')))
+    image_path_list_to_process.append(dependent_noun_image_path)
 
     # Generate the image
     processed_image_path_list = ImageProcessor.process_images(image_path_list_to_process)
+    processed_image_path_list.append(main_noun_image_path)
     created_image_path = ImageProcessor.generateImage(processed_image_path_list, word_dict.get('Preposition'))
     if created_image_path:
         print(created_image_path)

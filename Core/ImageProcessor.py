@@ -177,15 +177,15 @@ def generateImage(processed_image_path_list, preposition):
     '''
     start_time = time.time()
     main_noun_image_width = 800
-    dep_noun_image_width = 400
     main_noun_image_height = 600
+    dep_noun_image_width = 400
     dep_noun_image_height = 300
     border_gap_10 = 10
     border_gap_40 = 40
     near_gap = 10
 
-    main_noun_image_name = os.path.basename(processed_image_path_list[0])
-    dep_noun_image_name = os.path.basename(processed_image_path_list[1])
+    main_noun_image_name = os.path.basename(processed_image_path_list[1])
+    dep_noun_image_name = os.path.basename(processed_image_path_list[0])
     dep_noun_image_name = os.path.splitext(dep_noun_image_name)[0]
 
     # Write the temp image to the 'ProcessedImages' folder.
@@ -194,95 +194,108 @@ def generateImage(processed_image_path_list, preposition):
         os.makedirs(preposition_folder_path)
     created_image_path = os.path.join(preposition_folder_path, dep_noun_image_name + main_noun_image_name)
     if os.path.exists(created_image_path):
-        return
+        return created_image_path
 
     # Resize the image of the main noun.
-    main_noun_image = cv2.imread(processed_image_path_list[0], cv2.IMREAD_UNCHANGED)
+    main_noun_image = cv2.imread(processed_image_path_list[1], cv2.IMREAD_UNCHANGED)
     main_noun_image = image_resize(main_noun_image, width=main_noun_image_width)
     main_noun_image = cv2.resize(main_noun_image, (main_noun_image_width, main_noun_image_height))
+    main_noun_image_name = os.path.basename(processed_image_path_list[1])
+    main_noun_image_id = os.path.splitext(main_noun_image_name)[0]
     main_image_height, main_image_width = main_noun_image.shape[0:2]
     main_image_width_mid = round(main_image_width / 2)
     main_image_height_mid = round(main_image_height / 2)
 
-    # Resize the image of the dependent noun.
-    dep_noun_image = cv2.imread(processed_image_path_list[1], cv2.IMREAD_UNCHANGED)
-    dep_image_height, dep_image_width = dep_noun_image.shape[0:2]
-    if dep_image_height > dep_image_width:
-        dep_noun_image = image_resize(dep_noun_image, height=dep_noun_image_height)
-    else:
-        dep_noun_image = image_resize(dep_noun_image, width=dep_noun_image_width)
-    dep_image_height, dep_image_width = dep_noun_image.shape[0:2]
-    dep_image_width_mid = round(dep_image_width / 2)
-    dep_image_height_mid = round(dep_image_height / 2)
-    dep_image_height_three_quarter = round(dep_image_height * 0.75)
+    dep_noun_image = cv2.imread(processed_image_path_list[0], cv2.IMREAD_UNCHANGED)
 
-    # Create background canvas image
-    file_path = os.path.dirname(os.path.realpath(__file__))
-    background_image_path = os.path.join(file_path, './Icons/light-veneer.png')
-    background_image = cv2.imread(background_image_path)
-    background_image = cv2.resize(background_image, (main_image_width * 2, main_image_height * 2))
-    background_image_height, background_image_width = background_image.shape[0:2]
-    background_image_height_mid = round(background_image_height / 2)
-    background_image_width_mid = round(background_image_width / 2)
-
-    # Place the image of the main noun on canvas.
-    if preposition == 'above':
-        # Place the image of the main noun at the bottom of the canvas.
-        center_x = background_image_width_mid - main_image_width_mid
-        center_y = background_image_height - main_noun_image_height - border_gap_40
-        overlay_image_alpha(background_image, main_noun_image, (center_x, center_y))
-    elif preposition == 'between':
-        # Place two images of the main noun at both ends of the canvas.
-        center_x = border_gap_10
-        center_y = background_image_height_mid - main_image_height_mid
-        overlay_image_alpha(background_image, main_noun_image, (center_x, center_y))
-        center_x = background_image_width - main_noun_image_width - border_gap_10
-        overlay_image_alpha(background_image, main_noun_image, (center_x, center_y))
-    elif preposition == 'below':
-        # Place the image of the main noun at the top of the canvas.
-        center_x = background_image_width_mid - main_image_width_mid
-        center_y = border_gap_40
-        overlay_image_alpha(background_image, main_noun_image, (center_x, center_y))
-    else:
-        # Place the image of the main noun at the center of a canvas.
-        center_x = background_image_width_mid - main_image_width_mid
-        center_y = background_image_height_mid - main_image_height_mid
-        overlay_image_alpha(background_image, main_noun_image, (center_x, center_y))
-
-    # Calculate the new coordinates of the bounding box containing the image of the main noun on the canvas.
-    bb_x1_main = center_x
-    bb_y1_main = center_y
-    bb_x2_main = main_image_width + center_x
-    bb_y2_main = main_image_height + center_y
+    # Calculate the new coordinates of the bounding box containing the image of the main noun.
+    main_noun_bb_x1, main_noun_bb_y1, main_noun_bb_x2, main_noun_bb_y2 = calculateCoordinates(main_noun_image, main_noun_image_id)
+    main_noun_bb_width = main_noun_bb_x2 - main_noun_bb_x1
+    main_noun_bb_height = main_noun_bb_y2 - main_noun_bb_y1
+    main_noun_bb_width_mid = round(main_noun_bb_width / 2)
+    main_noun_bb_height_mid = round(main_noun_bb_height / 2)
 
     # Calculate the position to place the image of the dependent noun based on the preposition.
     if preposition == 'above':
-        pos_x = bb_x1_main + (main_image_width_mid - dep_image_width_mid)
-        pos_y = border_gap_40
+        dep_noun_image_width = main_noun_bb_x2 - main_noun_bb_x1
+        dep_noun_image_height = main_noun_bb_y1 - border_gap_10
+        dep_noun_image = cv2.imread(processed_image_path_list[0], cv2.IMREAD_UNCHANGED)
+        dep_image_height, dep_image_width = dep_noun_image.shape[0:2]
+        if dep_image_height < dep_image_width:
+            dep_noun_image = image_resize(dep_noun_image, height=dep_noun_image_height)
+        else:
+            dep_noun_image = image_resize(dep_noun_image, width=dep_noun_image_width)
+        dep_image_height, dep_image_width = dep_noun_image.shape[0:2]
+        dep_image_width_mid = round(dep_image_width / 2)
+        pos_x = main_noun_bb_x1 + (main_noun_bb_width_mid - dep_image_width_mid)
+        pos_y = main_noun_bb_y1 - dep_image_height - border_gap_10
     elif preposition == 'near':
-        pos_x = bb_x1_main - dep_noun_image_width - near_gap
-        pos_y = bb_y1_main + (main_image_height_mid - dep_image_height_mid)
-    elif preposition == 'between':
-        pos_x = background_image_width_mid - dep_image_width_mid
-        pos_y = background_image_height_mid - dep_image_height_mid
+        dep_noun_image_width = main_noun_bb_x1 - border_gap_10
+        dep_noun_image_height = main_noun_bb_y1 - border_gap_10
+        dep_noun_image = cv2.imread(processed_image_path_list[0], cv2.IMREAD_UNCHANGED)
+        dep_image_height, dep_image_width = dep_noun_image.shape[0:2]
+        if dep_image_height < dep_image_width:
+            dep_noun_image = image_resize(dep_noun_image, height=dep_noun_image_height)
+        else:
+            dep_noun_image = image_resize(dep_noun_image, width=dep_noun_image_width)
+        pos_x = 0
+        pos_y = 0
     elif preposition == 'below':
-        pos_x = bb_x1_main + (main_image_width_mid - dep_image_width_mid)
-        pos_y = background_image_height - dep_image_height - border_gap_40
+        dep_noun_image_width = main_noun_bb_x2 - main_noun_bb_x1
+        dep_noun_image_height = main_noun_bb_height - main_noun_bb_y2 - border_gap_10
+        dep_noun_image = cv2.imread(processed_image_path_list[0], cv2.IMREAD_UNCHANGED)
+        dep_image_height, dep_image_width = dep_noun_image.shape[0:2]
+        if dep_image_height < dep_image_width:
+            dep_noun_image = image_resize(dep_noun_image, height=dep_noun_image_height)
+        else:
+            dep_noun_image = image_resize(dep_noun_image, width=dep_noun_image_width)
+        dep_image_height, dep_image_width = dep_noun_image.shape[0:2]
+        dep_image_width_mid = round(dep_image_width / 2)
+        pos_x = main_noun_bb_x1 + (main_noun_bb_x2 - dep_image_width_mid)
+        pos_y = main_noun_bb_y1 + border_gap_10
     elif preposition == 'on':
-        pos_x = bb_x1_main + (main_image_width_mid - dep_image_width_mid)
-        pos_y = bb_y1_main - dep_image_height_three_quarter
+        dep_noun_image_width = main_noun_bb_x2 - main_noun_bb_x1
+        dep_noun_image_height = main_noun_bb_y1 - border_gap_10
+        dep_noun_image = cv2.imread(processed_image_path_list[0], cv2.IMREAD_UNCHANGED)
+        dep_image_height, dep_image_width = dep_noun_image.shape[0:2]
+        if dep_image_height < dep_image_width:
+            dep_noun_image = image_resize(dep_noun_image, height=dep_noun_image_height)
+        else:
+            dep_noun_image = image_resize(dep_noun_image, width=dep_noun_image_width)
+        dep_image_height, dep_image_width = dep_noun_image.shape[0:2]
+        dep_image_width_mid = round(dep_image_width / 2)
+        pos_x = main_noun_bb_x1 + (main_noun_bb_width_mid - dep_image_width_mid)
+        pos_y = main_noun_bb_y1 - dep_image_height
     elif preposition == 'under':
-        pos_x = bb_x1_main + (main_image_width_mid - dep_image_width_mid)
-        pos_y = bb_y2_main
+        dep_noun_image_width = main_noun_bb_x2 - main_noun_bb_x1
+        dep_noun_image_height = main_noun_bb_height - main_noun_bb_y2 - border_gap_10
+        dep_noun_image = cv2.imread(processed_image_path_list[0], cv2.IMREAD_UNCHANGED)
+        dep_image_height, dep_image_width = dep_noun_image.shape[0:2]
+        if dep_image_height < dep_image_width:
+            dep_noun_image = image_resize(dep_noun_image, height=dep_noun_image_height)
+        else:
+            dep_noun_image = image_resize(dep_noun_image, width=dep_noun_image_width)
+        dep_image_height, dep_image_width = dep_noun_image.shape[0:2]
+        dep_image_width_mid = round(dep_image_width / 2)
+        pos_x = main_noun_bb_x1 + (main_image_width_mid - dep_image_width_mid)
+        pos_y = main_noun_bb_y1
     else:
+        dep_noun_image_width = main_noun_bb_x1 - border_gap_10
+        dep_noun_image_height = main_noun_bb_y1 - border_gap_10
+        dep_noun_image = cv2.imread(processed_image_path_list[0], cv2.IMREAD_UNCHANGED)
+        dep_image_height, dep_image_width = dep_noun_image.shape[0:2]
+        if dep_image_height < dep_image_width:
+            dep_noun_image = image_resize(dep_noun_image, height=dep_noun_image_height)
+        else:
+            dep_noun_image = image_resize(dep_noun_image, width=dep_noun_image_width)
         pos_x = 0
         pos_y = 0
 
     # Place the image of the dependent noun on the canvas containing the image of the main noun at the coordinates
     # calculated according to the preposition.
-    overlay_image_alpha(background_image, dep_noun_image, (pos_x, pos_y))
+    overlay_image_alpha(main_noun_image, dep_noun_image, (pos_x, pos_y))
 
-    cv2.imwrite(created_image_path, background_image)
+    cv2.imwrite(created_image_path, main_noun_image)
     # print("--- %s seconds(Create Image) ---" % (time.time() - start_time))
 
     return created_image_path
