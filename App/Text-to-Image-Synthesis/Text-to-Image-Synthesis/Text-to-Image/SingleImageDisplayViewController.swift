@@ -14,7 +14,7 @@ class SingleImageDisplayViewController: UIViewController {
     var voiceCommandText: String = ""
     let info = ProcessInfo.processInfo
     var startTime = 0.0
-    let preposition_words = ["on", "under", "above", "below", "near", "between"]
+    static let preposition_words = ["on", "under", "above", "below", "near"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,13 +26,7 @@ class SingleImageDisplayViewController: UIViewController {
     
     //MARK: - ImageView Helper functions
     private func loadImage(_ voiceCommandText: String) {
-        var known_preposition = false
-        for word in preposition_words {
-            if voiceCommandText.lowercased().contains(word) {
-                known_preposition = true
-            }
-        }
-        if !known_preposition {
+        if SingleImageDisplayViewController.isKnownPrepositionInCommandString(voiceCommandText) {
             self.sendAlert(message: "Uknown preposition. Please try again!")
         } else {
             let fetcher = ImageFetcher()
@@ -61,6 +55,21 @@ class SingleImageDisplayViewController: UIViewController {
                 print("Elapsed Time: \(diff)")
             }
         }
+    }
+    
+    // Unit Test Candidate
+    static internal func isKnownPrepositionInCommandString(_ commandString: String) -> Bool {
+        var known_preposition = false
+        for word in preposition_words {
+            let commands = commandString.split(separator: " ")
+            for command in commands {
+                if command.lowercased().elementsEqual(word) {
+                    known_preposition = true
+                    break
+                }
+            }
+        }
+        return known_preposition
     }
     
     private func updateViewWithImage(_ data: Data) {

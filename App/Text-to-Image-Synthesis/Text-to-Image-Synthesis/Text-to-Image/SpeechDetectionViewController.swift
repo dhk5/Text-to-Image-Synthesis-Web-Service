@@ -28,6 +28,10 @@ class SpeechDetectionViewController: UIViewController, SFSpeechRecognizerDelegat
     
     //MARK: IBActions and Cancel
     @IBAction func startButtonTapped(_ sender: UIButton) {
+        startButtonTapped()
+    }
+    
+    internal func startButtonTapped() {
         if isRecording == true {
             self.audioEngine.inputNode.removeTap(onBus: 0)
             self.audioEngine.stop()

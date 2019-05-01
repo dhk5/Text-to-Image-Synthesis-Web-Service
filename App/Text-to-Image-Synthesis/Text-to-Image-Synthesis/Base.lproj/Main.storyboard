@@ -12,7 +12,7 @@
         <!--Speech To Text-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="SpeechDetectionViewController" customModule="Text_to_Image_Synthesis" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SpeechDetectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="SpeechDetectionViewController" customModule="Text_to_Image_Synthesis" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -69,7 +69,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="VgV-c9-Qkd">
             <objects>
-                <tabBarController id="7ql-nT-4SV" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="UITabBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7ql-nT-4SV" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XsO-Gj-G8p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -87,7 +87,7 @@
         <!--Image To Text-->
         <scene sceneID="Mdf-MZ-e7e">
             <objects>
-                <navigationController title="Image To Text" automaticallyAdjustsScrollViewInsets="NO" id="FYk-h1-vvX" customClass="ImageToTextNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ImageToTextNavigationController" title="Image To Text" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FYk-h1-vvX" customClass="ImageToTextNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Image-to-Text" id="BHa-N3-klS"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XBv-zw-KwD">
@@ -106,7 +106,7 @@
         <!--Images To Text-->
         <scene sceneID="lV2-ap-blS">
             <objects>
-                <collectionViewController id="Zhg-im-TBQ" customClass="ImageCollectionViewController" customModule="Text_to_Image_Synthesis" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="ImageCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Zhg-im-TBQ" customClass="ImageCollectionViewController" customModule="Text_to_Image_Synthesis" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="DG1-2d-aKo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -183,7 +183,7 @@
         <!--Image Create View Controller-->
         <scene sceneID="nkb-Ad-uHs">
             <objects>
-                <viewController id="iSK-B2-tMK" customClass="ImageCreateViewController" customModule="Text_to_Image_Synthesis" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ImageCreateViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="iSK-B2-tMK" customClass="ImageCreateViewController" customModule="Text_to_Image_Synthesis" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6ko-mG-ax2"/>
                         <viewControllerLayoutGuide type="bottom" id="PO5-lt-l70"/>
@@ -245,7 +245,7 @@
         <!--SpeechToImage-->
         <scene sceneID="eIt-Gs-2gG">
             <objects>
-                <navigationController title="SpeechToImage" automaticallyAdjustsScrollViewInsets="NO" id="gUP-iT-dyU" customClass="SpeechToImageNavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SpeechToImageNavigationController" title="SpeechToImage" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gUP-iT-dyU" customClass="SpeechToImageNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Text-to-Image" id="TOQ-ef-vSn"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="86L-I3-CAI">
@@ -264,7 +264,7 @@
         <!--Single Image Display View Controller-->
         <scene sceneID="G8S-jl-4w4">
             <objects>
-                <viewController id="QW7-fb-PJC" customClass="SingleImageDisplayViewController" customModule="Text_to_Image_Synthesis" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SingleImageDisplayViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QW7-fb-PJC" customClass="SingleImageDisplayViewController" customModule="Text_to_Image_Synthesis" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DnD-IO-32i"/>
                         <viewControllerLayoutGuide type="bottom" id="7z9-mN-GRU"/>

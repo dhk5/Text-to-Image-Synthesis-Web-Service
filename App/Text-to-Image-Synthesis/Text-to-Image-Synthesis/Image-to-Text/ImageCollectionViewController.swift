@@ -12,6 +12,7 @@ import UIKit
 final class ImageCollectionViewController: UICollectionViewController {
     @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBOutlet weak var nextButton: UIBarButtonItem!
+    
     // MARK: - Properties
     let reuseIdentifier = "ImageCell"
     let placeHolderImageName = "placeholder"
@@ -31,6 +32,10 @@ final class ImageCollectionViewController: UICollectionViewController {
     var shouldReload = false
     
     @IBAction func refreshButtonTapped(_ sender: UIButton) {
+        refreshButtonTapped()
+    }
+    
+    internal func refreshButtonTapped() {
         collectionView!.performBatchUpdates({
             // refresh cells
             for i in 0..<numberOfSections {
@@ -129,7 +134,31 @@ extension ImageCollectionViewController {
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
                                                       for: indexPath) as! ImageCell
+        // Load image on the cell
+        loadImageOnCell(cell, indexPath)
+        return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView,
+                                 didSelectItemAt indexPath: IndexPath) {
+        let cellIndex = (indexPath.section * numberOfItemsInSection) + indexPath.row
+        print("You selected cell #\(cellIndex)!")
+        let imageData = imageDataArr[cellIndex]
         
+        updateSelectedData(collectionView, indexPath, imageData, cellIndex)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView,
+                                 didDeselectItemAt indexPath: IndexPath) {
+        let cellIndex = (indexPath.section * numberOfItemsInSection) + indexPath.row
+        print("You de-selected cell #\(cellIndex)!")
+        let imageData = imageDataArr[cellIndex]
+        
+        removeDeSelected(collectionView, indexPath, imageData, cellIndex)
+    }
+    
+    //MARK: - UICollectionViewDataSource Helper functions
+    internal func loadImageOnCell(_ cell: ImageCell, _ indexPath: IndexPath) {
         if !cell.isImageLoaded || shouldReload {
             // Update cell with image name and id
             let randomImageName = nameIdMap.randomElement()?.key
@@ -143,60 +172,14 @@ extension ImageCollectionViewController {
             // Remove used image.
             nameIdMap.remove(at: nameIdMap.index(forKey: randomImageName!)!)
             
-            self.loadImageOnCell(imageDataObject, indexPath, cell)
-        }
-        
-        return cell
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView,
-                                 didSelectItemAt indexPath: IndexPath) {
-        let cellIndex = (indexPath.section * numberOfItemsInSection) + indexPath.row
-        print("You selected cell #\(cellIndex)!")
-        let imageData = imageDataArr[cellIndex]
-        
-        // Add cell to selected and highlight when number of selected
-        // is less or equal to max number of selected.
-        if arrSelectedData.count < maxNumberOfSelectedData {
-            let cell = collectionView.cellForItem(at: indexPath)!
-            cell.backgroundColor = collectionView.tintColor
-            print("You added a cell #\(cellIndex) to selected data!")
-            arrSelectedIndex.append(indexPath)
-            arrSelectedData.append(imageData)
-            
-            if arrSelectedData.count == maxNumberOfSelectedData {
-                nextButton.isEnabled = true
-            }
+            self.downloadAndLoadImageOnCell(imageDataObject, indexPath, cell, 5)
         }
     }
     
-    override func collectionView(_ collectionView: UICollectionView,
-                                 didDeselectItemAt indexPath: IndexPath) {
-        let cellIndex = (indexPath.section * numberOfItemsInSection) + indexPath.row
-        print("You de-selected cell #\(cellIndex)!")
-        let imageData = imageDataArr[cellIndex]
-        
-        // Removed cell from selected and clear highlight when number of selected
-        // is higer than 0.
-        if arrSelectedData.count > 0 {
-            let cell = collectionView.cellForItem(at: indexPath)!
-            cell.backgroundColor = UIColor.clear
-            for selectedDataIndex in 0...arrSelectedData.count-1 {
-                if arrSelectedData[selectedDataIndex].imageId == imageData.imageId {
-                    print("You removed a cell #\(cellIndex) to selected data!")
-                    arrSelectedData.remove(at: selectedDataIndex)
-                    break
-                }
-            }
-            
-            if arrSelectedData.count != maxNumberOfSelectedData {
-                nextButton.isEnabled = false
-            }
-        }
-    }
-    
-    //MARK: - UICollectionViewDataSource Helper functions
-    private func loadImageOnCell(_ imageData: ImageData, _ indexPath: IndexPath, _ cell: ImageCell) {
+    internal func downloadAndLoadImageOnCell(_ imageData: ImageData,
+                                             _ indexPath: IndexPath,
+                                             _ cell: ImageCell,
+                                             _ count: Int) {
         let fetcher = ImageFetcher()
         print("Downloading Started For Cell Index: \(indexPath)")
         fetcher.fetchRandomImage(imageID: imageData.imageId) { data, response, error in
@@ -218,9 +201,55 @@ extension ImageCollectionViewController {
                         cell.imageLabel.text = imageData.imageName
                         self.updateCellWithImage(image, cell)
                     } else {
-                        self.loadImageOnCell(imageData, indexPath, cell)
+                        if count > 0 {
+                            print("Retry with different image, count: \(count)")
+                            self.downloadAndLoadImageOnCell(imageData, indexPath, cell, count - 1)
+                        }
                     }
                 }
+            }
+        }
+    }
+    
+    internal func updateSelectedData(_ collectionView: UICollectionView,
+                                     _ indexPath: IndexPath,
+                                     _ imageData: ImageData,
+                                     _ cellIndex: Int) {
+        // Add cell to selected and highlight when number of selected
+        // is less or equal to max number of selected.
+        if arrSelectedData.count < maxNumberOfSelectedData {
+            let cell = collectionView.cellForItem(at: indexPath)!
+            cell.backgroundColor = collectionView.tintColor
+            print("You added a cell #\(cellIndex) to selected data index \(indexPath)!")
+            arrSelectedIndex.append(indexPath)
+            arrSelectedData.append(imageData)
+            
+            if arrSelectedData.count == maxNumberOfSelectedData {
+                print("Selected two images. Next button is enabled!")
+                nextButton.isEnabled = true
+            }
+        }
+    }
+    
+    internal func removeDeSelected(_ collectionView: UICollectionView,
+                                  _ indexPath: IndexPath,
+                                  _ imageData: ImageData,
+                                  _ cellIndex: Int) {
+        // Removed cell from selected and clear highlight when number of selected
+        // is higer than 0.
+        if arrSelectedData.count > 0 {
+            let cell = collectionView.cellForItem(at: indexPath)!
+            cell.backgroundColor = UIColor.clear
+            for selectedDataIndex in 0...arrSelectedData.count-1 {
+                if arrSelectedData[selectedDataIndex].imageId == imageData.imageId {
+                    print("You removed a cell #\(cellIndex) to selected data!")
+                    arrSelectedData.remove(at: selectedDataIndex)
+                    break
+                }
+            }
+            
+            if arrSelectedData.count != maxNumberOfSelectedData {
+                nextButton.isEnabled = false
             }
         }
     }

@@ -2,4 +2,54 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Text-to-Image-Synthesis/Image-to-Text/ImageCollectionViewController.swift"
+            timestampString = "578195890.72681"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "204"
+            endingLineNumber = "204"
+            landmarkName = "downloadAndLoadImageOnCell(_:_:_:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Text_to_Image_Synthesis.ImageCollectionViewController.downloadAndLoadImageOnCell(Text_to_Image_Synthesis.ImageData, Foundation.IndexPath, Text_to_Image_Synthesis.ImageCell, Swift.Int) -&gt; ()"
+                  moduleName = "Text-to-Image-Synthesis"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rkang/Google%20Drive/School/MCSSE/Capstone/Text-to-Image-Synthesis-Web-Service/App/Text-to-Image-Synthesis/Text-to-Image-Synthesis/Image-to-Text/ImageCollectionViewController.swift"
+                  timestampString = "578195890.732738"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "204"
+                  endingLineNumber = "204"
+                  offsetFromSymbolStart = "708">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Text_to_Image_SynthesisTests.ImageCollectionViewController.downloadAndLoadImageOnCell(Text_to_Image_SynthesisTests.ImageData, Foundation.IndexPath, Text_to_Image_SynthesisTests.ImageCell, Swift.Int) -&gt; ()"
+                  moduleName = "Text-to-Image-SynthesisTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rkang/Google%20Drive/School/MCSSE/Capstone/Text-to-Image-Synthesis-Web-Service/App/Text-to-Image-Synthesis/Text-to-Image-Synthesis/Image-to-Text/ImageCollectionViewController.swift"
+                  timestampString = "578195892.098039"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "204"
+                  endingLineNumber = "204"
+                  offsetFromSymbolStart = "708">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

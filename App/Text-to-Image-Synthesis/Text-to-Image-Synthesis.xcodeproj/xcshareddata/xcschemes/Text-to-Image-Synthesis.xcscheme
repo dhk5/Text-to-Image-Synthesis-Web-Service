@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B6EE6BE82274C438002FA97F"
+               BuildableName = "Text-to-Image-SynthesisTests.xctest"
+               BlueprintName = "Text-to-Image-SynthesisTests"
+               ReferencedContainer = "container:Text-to-Image-Synthesis.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

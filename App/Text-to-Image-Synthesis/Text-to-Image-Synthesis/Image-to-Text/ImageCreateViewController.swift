@@ -26,11 +26,7 @@ class ImageCreateViewController: UIViewController {
     }()
     
     @IBAction func generateButtonTapped(_ sender: Any) {
-        let string = NSMutableAttributedString(string: "\(mainNoundImageTitle) \(imagePreposition) \(dependentNounImageTitle)")
-        string.setColorForText("\(mainNoundImageTitle)", with: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))
-        string.setColorForText("\(imagePreposition)", with: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
-        string.setColorForText("\(dependentNounImageTitle)", with: #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1))
-        imageDescriptionLabel.attributedText = string
+        generateButtonTapped()
     }
     
     @objc
@@ -49,7 +45,15 @@ class ImageCreateViewController: UIViewController {
         }
     }
     
-    private func calculateDistance() {
+    internal func generateButtonTapped() {
+        let string = NSMutableAttributedString(string: "\(mainNoundImageTitle) \(imagePreposition) \(dependentNounImageTitle)")
+        string.setColorForText("\(mainNoundImageTitle)", with: #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1))
+        string.setColorForText("\(imagePreposition)", with: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
+        string.setColorForText("\(dependentNounImageTitle)", with: #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1))
+        imageDescriptionLabel.attributedText = string
+    }
+    
+    internal func calculateDistance() {
         let locationDifferenceX = dependentNounImageView.center.x - mainNounImageView.center.x
         let locationDifferenceY = dependentNounImageView.center.y - mainNounImageView.center.y
         print("Image Location Difference: \(locationDifferenceX), \(locationDifferenceY)")
